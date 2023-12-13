@@ -37,4 +37,29 @@ while True:
     # 그레이스케일로 변환하여 얼굴 검출
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-    
+
+    # Mediapipe를 이용한 손 검출
+    image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(image)
+
+    v_count = 0
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp_drawing.draw_landmarks(
+                frame,
+                hand_landmarks,
+                mp_hands.HAND_CONNECTIONS,
+                mp.solutions.drawing_styles.get_default_hand_landmarks_style(),
+                mp.solutions.drawing_styles.get_default_hand_connections_style(),
+            )
+
+            points = hand_landmarks.landmark
+
+            fingers = 0
+
+            if distance(points[4], points[9]) > distance(points[3], points[9]):
+                fingers += 1
+
+            for i in range(8, 21, 4):
+                if distance(points[i], points[0]) > distance(points[i - 1], points[0]):
+                    fingers += 1
