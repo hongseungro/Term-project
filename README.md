@@ -7,7 +7,7 @@ $ pip install python
 ```
 2. **Install Dependencies**
 ```bash
-$ pip install meiapipe
+$ pip install mediapipe
 ```
 3. Run
 ```bash
