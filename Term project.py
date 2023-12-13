@@ -58,9 +58,6 @@ while True:
 
             fingers = 0
 
-            if distance(points[4], points[9]) > distance(points[3], points[9]):
-                fingers += 1
-
             for i in range(8, 21, 4):
                 if distance(points[i], points[0]) > distance(points[i - 1], points[0]):
                     fingers += 1
