@@ -26,9 +26,9 @@ Although three people pose 'V', if just one person don't pose, the screen is not
 - Capture of the current screen when a 'V' hand shape is detected
 
 # Requirements
--Python 3.xx
--OpenCV
--Mediapipe
+- Python 3.xx
+- OpenCV
+- Mediapipe
 
 # Source of reference
 - detect human's face
