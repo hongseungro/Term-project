@@ -59,3 +59,31 @@ while True:
             for i in range(8, 21, 4):
                 if distance(points[i], points[0]) > distance(points[i - 1], points[0]):
                     fingers += 1
+            if fingers == 2:
+                hand_shape = "V"
+                v_count += 1
+            else:
+                hand_shape = ""
+
+            cv2.putText(
+                frame,
+                hand_shape,
+                (int(points[12].x * frame.shape[1]), int(points[12].y * frame.shape[0])),
+                cv2.FONT_HERSHEY_COMPLEX,
+                3,
+                (0, 255, 0),
+                5,
+            )
+
+    if v_count == len(faces):
+        cv2.imwrite(f'frame_{frame_number}.jpg', frame)
+        frame_number += 1
+
+    cv2.imshow("MediaPipe Hands", frame)
+
+    key = cv2.waitKey(1)
+    if key == 27:
+        break
+
+cv2.destroyAllWindows()
+cap.release()
